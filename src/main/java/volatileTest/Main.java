@@ -1,7 +1,8 @@
 package volatileTest;
 
 import java.util.concurrent.atomic.AtomicInteger;
-
+//关键字volatile可以用来修饰字段(成员变量)，就是告知程序任务对该变量的访问均需要从共享内存中获取
+//而对它的改变必须同步刷新回共享内存，它能保证 所有线程对变量访问的可见性
 /***
  * 大家想一下这段程序的输出结果是多少？也许有些朋友认为是10000。
  * 但是事实上运行它会发现每次运行结果都不一致，都是一个小于10000的数字。
@@ -36,7 +37,6 @@ public class Main {
                 };
             }.start();
         }
- 
         while(Thread.activeCount()>1)  //保证前面的线程都执行完
             Thread.yield();
         System.out.println(test.inc);
